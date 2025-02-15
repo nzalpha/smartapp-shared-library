@@ -18,7 +18,7 @@ def call(Map pipelineParams){
             steps{
                 script{
                     echo "--------------------- Executing Build Stage ----------------------"
-                    d.buildApp("${env.Application_Name}")
+                    d.add(5,6)
                 }
             }
         }

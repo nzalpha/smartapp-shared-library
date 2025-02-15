@@ -21,6 +21,7 @@ class Docker{
         // build using maven
         sh 'mvn clean package -DskipTests=true'
         archiveArtifacts artifacts: 'target/*.jar'
+        echo "********"
     }
 }
 

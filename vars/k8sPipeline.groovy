@@ -2,7 +2,7 @@
 import com.smartapp.builds.k8s.k8s
 
 def call(Map pipelineParams){
-    k8s k = new k8s(this)
+    k8s d = new k8s(this)
 
     pipeline{
     agent{
@@ -14,11 +14,11 @@ def call(Map pipelineParams){
     }
 
     stages{
-        stage("Auth"){
+        stage("Build the app"){
             steps{
                 script{
-                    echo "--------------------- Executing auth Stage ----------------------"
-                    k.auth_login()
+                    echo "--------------------- Executing Build Stage ----------------------"
+                    d.buildApp("${env.Application_Name}")
                 }
             }
         }

@@ -9,7 +9,9 @@ class Docker{
     // Test Addition method
 
     def add(fNum,sNum){
+        echo "add"
         return fNum + sNum
+        
     }
 
     // Method for Application Build

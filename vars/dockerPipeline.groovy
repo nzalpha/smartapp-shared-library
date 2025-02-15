@@ -18,7 +18,7 @@ def call(Map pipelineParams){
             steps{
                 script{
                     echo "--------------------- Executing Build Stage ----------------------"
-                    d.add(5,6)
+                    println k.auth_login(5,9)
                 }
             }
         }

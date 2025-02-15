@@ -13,6 +13,14 @@ class Docker{
     }
 
     // Method for Application Build
+    def buildApp(appName){
+    return {
+        echo "Building appName Application"
+        // build using maven
+        sh 'mvn clean package -DskipTests=true'
+        archiveArtifacts artifacts: 'target/*.jar'
+    }
+}
 
     // Docker build
 

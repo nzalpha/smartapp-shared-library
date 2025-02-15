@@ -1,8 +1,8 @@
 
-import com.smartapp.builds.Docker
+import com.smartapp.builds.k8s.k8s
 
 def call(Map pipelineParams){
-    Docker d = new Docker(this)
+    k8s k = new k8s(this)
 
     pipeline{
     agent{
@@ -14,11 +14,11 @@ def call(Map pipelineParams){
     }
 
     stages{
-        stage("Build the app"){
+        stage("Auth"){
             steps{
                 script{
-                    echo "--------------------- Executing Build Stage ----------------------"
-                    d.buildApp("${env.Application_Name}")
+                    echo "--------------------- Executing auth Stage ----------------------"
+                    k.auth_login()
                 }
             }
         }

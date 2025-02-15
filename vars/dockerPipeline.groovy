@@ -9,6 +9,10 @@ def call(Map pipelineParams){
         label 'workernode-1'
     }
 
+    environment{
+        Application_Name = "${pipelineParams.appName}"
+    }
+
     stages{
         stage("Adding"){
             steps{

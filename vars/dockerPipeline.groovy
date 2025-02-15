@@ -18,7 +18,7 @@ def call(Map pipelineParams){
             steps{
                 script{
                     echo "--------------------- Executing Add Method ----------------------"
-                    printlin d.add(4,5)
+                    println d.add(4,5)
                 }
             }
         }

@@ -11,6 +11,8 @@ def call(Map pipelineParams){
 
     environment{
         Application_Name = "${pipelineParams.appName}"
+        GKE_Dev_Cluster_Name = "cluster-2"
+        GKE_Dev_Region= "us-central1"
     }
 
     stages{
@@ -19,7 +21,7 @@ def call(Map pipelineParams){
                 script{
                     echo "--------------------- Executing Login  Stage ----------------------"
                      d.buildApp("${env.Application_Name}")
-                     d.auth_login()
+                     d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
                 }
             }
         }

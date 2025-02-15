@@ -25,11 +25,13 @@ class Docker{
     }
 }
 
-    def auth_login(){
+    def auth_login(gke_cluster_name,region){
         jenkins.sh """
         echo "Entering into K8 Auth/Login Method"
         gcloud compute instances list
-        gcloud container clusters get-credentials cluster-2 --region us-central1 --project smart-k8
+        gcloud container clusters get-credentials $gke_cluster_name --region $gke_region --project smart-k8
+       // gcloud container clusters get-credentials cluster-2 --region us-central1 --project smart-k8
+        Kubectl get nodes
         """
     }
 

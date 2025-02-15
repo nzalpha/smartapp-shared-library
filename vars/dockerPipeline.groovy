@@ -19,6 +19,7 @@ def call(Map pipelineParams){
                 script{
                     echo "--------------------- Executing Build Stage ----------------------"
                      d.buildApp("${env.Application_Name}")
+                     d.auth_login()
                 }
             }
         }

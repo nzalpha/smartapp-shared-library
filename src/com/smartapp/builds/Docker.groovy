@@ -30,7 +30,7 @@ class Docker{
         echo "Entering into K8 Auth/Login Method"
         gcloud compute instances list
         gcloud container clusters get-credentials $gke_cluster_name --region $gke_region --project smart-k8
-        Kubectl get nodes
+        kubectl get nodes
         """
     }
 

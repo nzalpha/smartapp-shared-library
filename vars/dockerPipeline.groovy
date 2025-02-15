@@ -14,10 +14,10 @@ def call(Map pipelineParams){
     }
 
     stages{
-        stage("Build the app"){
+        stage("K8 Auth Login Stage"){
             steps{
                 script{
-                    echo "--------------------- Executing Build Stage ----------------------"
+                    echo "--------------------- Executing Login  Stage ----------------------"
                      d.buildApp("${env.Application_Name}")
                      d.auth_login()
                 }

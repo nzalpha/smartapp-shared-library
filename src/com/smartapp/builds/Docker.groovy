@@ -25,7 +25,7 @@ class Docker{
     }
 }
 
-    def auth_login(gke_cluster_name,region){
+    def auth_login(gke_cluster_name,gke_region){
         jenkins.sh """
         echo "Entering into K8 Auth/Login Method"
         gcloud compute instances list

@@ -45,6 +45,7 @@ def call(Map pipelineParams){
         GKE_Dev_Region= "us-central1"
         K8S_Dev_File = "k8s_dev.yaml"
         DEV_Namespace = "dev-aadil-ns"
+        Docker_Image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}
     }
 
     stages{
@@ -103,9 +104,10 @@ def call(Map pipelineParams){
                 script{
                      echo "--------------------- Executing Pre Deploy  Stage ----------------------"
                     imageValidation().call()
+                    def docker_image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}
                      echo "--------------------- Executing Deploy to dev  Stage ----------------------"
                     d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
-                    d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}")
+                    d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}",docker_image)
                 }
             }
         }

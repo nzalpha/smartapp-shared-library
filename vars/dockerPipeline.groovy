@@ -101,7 +101,9 @@ def call(Map pipelineParams){
             }
             steps {
                 script{
+                     echo "--------------------- Executing Pre Deploy  Stage ----------------------"
                     imageValidation().call()
+                     echo "--------------------- Executing Deploy to dev  Stage ----------------------"
                     d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
                     d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}")
                 }
@@ -130,9 +132,9 @@ def dockerBuildandPush(){
     return{
         echo "Starting Docker Build "
         echo "Copy the jar to the folder where Docker file is present"
-        sh "cp ${WORKSPACE}/target/i27-${env.Application_Name}-${env.Pom_Version}.${env.Pom_Packaging} ./.cicd/"
+        sh "cp ${WORKSPACE}/target/${env.Application_Name}-${env.Pom_Version}.${env.Pom_Packaging} ./.cicd/"
         echo "********************* Building Docker Image ********************"
-        sh "docker build --force-rm  --no-cache --build-arg JAR_SRC=i27-${env.Application_Name}-${env.Pom_Version}.${env.Pom_Packaging}  -t ${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT} ./.cicd"
+        sh "docker build --force-rm  --no-cache --build-arg JAR_SRC=${env.Application_Name}-${env.Pom_Version}.${env.Pom_Packaging}  -t ${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT} ./.cicd"
         echo "********************* Login to Docker Repo ********************"
         sh "docker login -u ${Docker_Creds_USR} -p ${Docker_Creds_PSW}"
         echo "********************* Docker Push ********************"

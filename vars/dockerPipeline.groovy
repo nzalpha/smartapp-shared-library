@@ -45,7 +45,7 @@ def call(Map pipelineParams){
         GKE_Dev_Region= "us-central1"
         K8S_Dev_File = "k8s_dev.yaml"
         DEV_Namespace = "dev-aadil-ns"
-        Docker_Image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}
+        Docker_Image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}"
     }
 
     stages{

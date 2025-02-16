@@ -36,6 +36,10 @@ def call(Map pipelineParams){
     }
 
     environment{
+        Pom_Version = readMavenPom().getVersion()
+        Pom_Packaging = readMavenPom().getPackaging()
+        Docker_Hub = "docker.io/aadil08"
+        Docker_Creds = credentials('docker_creds')
         Application_Name = "${pipelineParams.appName}"
         GKE_Dev_Cluster_Name = "cluster-2"
         GKE_Dev_Region= "us-central1"

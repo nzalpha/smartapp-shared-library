@@ -95,7 +95,7 @@ def call(Map pipelineParams){
            when {
                 anyOf{
                     expression {
-                        params.deployToDev == "yes"
+                        params.K8deployToDev == "yes"
                     }
                 }
             }

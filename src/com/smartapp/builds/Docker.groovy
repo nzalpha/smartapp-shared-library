@@ -34,7 +34,15 @@ class Docker{
         """
     }
 
-    // Docker build
+    // K8 Deployment
+
+    def deployinK8(fileName,namespace){
+        jenkins.sh """
+        echo "Entering into K8 Deploy Method"
+        kubectl apply -f ./.cicd/$fileName -n $namespace
+        """
+    }
+
 
     // Docker login
 

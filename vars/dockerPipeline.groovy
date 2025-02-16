@@ -45,6 +45,12 @@ def call(Map pipelineParams){
         GKE_Dev_Region= "us-central1"
         K8S_Dev_File = "k8s_dev.yaml"
         DEV_Namespace = "dev-aadil-ns"
+
+        K8S_Stg_File = "k8s_Stg.yaml"
+        Stg_Namespace = "stg-aadil-ns"
+
+        K8S_Prod_File = "k8s_Prod.yaml"
+        Prod_Namespace = "prod-aadil-ns"
         
     }
 
@@ -108,6 +114,50 @@ def call(Map pipelineParams){
                      echo "--------------------- Executing Deploy to dev  Stage ----------------------"
                     d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
                     d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}",docker_image)
+                }
+            }
+        }
+
+
+
+        stage ('Deploy to Stg'){
+           when {
+                anyOf{
+                    expression {
+                        params.K8deployToStg == "yes"
+                    }
+                }
+            }
+            steps {
+                script{
+                     echo "--------------------- Executing Pre Deploy  Stage ----------------------"
+                    imageValidation().call()
+                    def docker_image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}"
+                     echo "--------------------- Executing Deploy to Stg  Stage ----------------------"
+                    d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
+                    d.deployinK8("${env.K8S_Stg_File}","${env.Stg_Namespace}",docker_image)
+                }
+            }
+        }
+
+
+
+        stage ('Deploy to Prod'){
+           when {
+                anyOf{
+                    expression {
+                        params.K8deployToStg == "yes"
+                    }
+                }
+            }
+            steps {
+                script{
+                     echo "--------------------- Executing Pre Deploy  Stage ----------------------"
+                    imageValidation().call()
+                    def docker_image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}"
+                     echo "--------------------- Executing Deploy to dev  Stage ----------------------"
+                    d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
+                    d.deployinK8("${env.K8S_Prod_File}","${env.Prod_Namespace}",docker_image)
                 }
             }
         }

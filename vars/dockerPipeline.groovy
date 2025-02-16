@@ -110,6 +110,7 @@ def call(Map pipelineParams){
     }
 
     }
+}
 
 
     def buildApp(){
@@ -149,4 +150,4 @@ def imageValidation(){
     }
 }
 
-}
+

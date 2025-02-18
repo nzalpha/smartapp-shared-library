@@ -16,12 +16,7 @@ pipeline{
     }
 
     parameters{
-        choice (name: 'buildOnly',
-                choices: 'no\nyes',
-                description: "Build the Application only")
-        choice (name: 'dockerformat',
-                choices: 'no\nyes',
-                description: "format docker")
+        
         choice (name: 'dockerPush',
                 choices: 'no\nyes',
                 description: "this will push to registry")
@@ -42,8 +37,7 @@ pipeline{
     }
 
     environment{
-        Pom_Version = readMavenPom().getVersion()
-        Pom_Packaging = readMavenPom().getPackaging()
+        
         Docker_Hub = "docker.io/aadil08"
         Docker_Creds = credentials('docker_creds')
         Application_Name = "${pipelineParams.appName}"

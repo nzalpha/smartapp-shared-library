@@ -20,13 +20,13 @@ pipeline{
         choice (name: 'dockerPush',
                 choices: 'no\nyes',
                 description: "this will push to registry")
-        choice (name: 'deployToDev',
+        choice (name: 'K8deployToDev',
                 choices: 'no\nyes',
                 description: "Deploy app to Dev only ")
-        choice (name: 'deployToStg',
+        choice (name: 'K8deployToStg',
                 choices: 'no\nyes',
                 description: "Deploy app to Stage only ")
-        choice (name: 'deployToProd',
+        choice (name: 'K8deployToProd',
                 choices: 'no\nyes',
                 description: "Deploy app to Prod only ")
     }

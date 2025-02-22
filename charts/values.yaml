@@ -1,0 +1,15 @@
+# Values can be mentioned in this file
+
+#            or
+
+
+# Values can be passed at the application level, I am passing at application because data changes based on MS
+
+appName: eureka-dev
+depName: eureka-dev-dep
+svcName:
+replicas: 
+  default: 1
+image:
+  name: xyz
+targetPort: 8761

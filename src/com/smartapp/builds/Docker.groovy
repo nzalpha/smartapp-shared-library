@@ -45,7 +45,14 @@ class Docker{
     }
 
 
-    // Docker login
+    // Helm Deployment
+
+    def k8sHelmChartDeploy(){
+        jenkins.sh """
+        echo "Entering Helm Groovy Method"
+        helm version
+        """
+    }
 
 
 

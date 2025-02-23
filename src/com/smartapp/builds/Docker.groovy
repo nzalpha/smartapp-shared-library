@@ -50,9 +50,13 @@ class Docker{
     def k8sHelmChartDeploy(appName, env, helmChartPath, imageTag){
         jenkins.sh """
         echo "Entering Helm Groovy Method"
-        helm version
-        echo "Intalling the Chart "
-        helm install ${appName}-${env}-chart -f  ./.cicd/helm/values_${env}.yaml --set image.tag=${imageTag}  ${helmChartPath} 
+        echo "Verifying if helm chart already exists"
+        if helm list | grep -q ${appName}-${env}-chart; then
+            echo "this chart exists, now we will upgrade the chart"
+            helm upgrade ${appName}-${env}-chart -f  ./.cicd/helm/values_${env}.yaml --set image.tag=${imageTag}  ${helmChartPath} 
+        else
+            echo "Intalling the Chart "
+            helm install ${appName}-${env}-chart -f  ./.cicd/helm/values_${env}.yaml --set image.tag=${imageTag}  ${helmChartPath} 
         """
     }
 

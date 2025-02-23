@@ -125,7 +125,7 @@ def call(Map pipelineParams){
                     imageValidation().call()
                     def docker_image = "${env.Docker_Hub}/${env.Application_Name}:${GIT_COMMIT}"
                      echo "--------------------- Executing Deploy to dev  Stage ----------------------"
-                    //d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
+                    d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
                     //d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}",docker_image)
                     d.k8sHelmChartDeploy(${env.Application_Name},"${env.Dev_Env}","${env.Helm_Path}","${GIT_COMMIT}")  
                 }

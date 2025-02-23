@@ -57,6 +57,7 @@ class Docker{
         else
             echo "Intalling the Chart "
             helm install ${appName}-${env}-chart -f  ./.cicd/helm/values_${env}.yaml --set image.tag=${imageTag}  ${helmChartPath} 
+        fi
         """
     }
 

@@ -51,10 +51,23 @@ def call(Map pipelineParams){
 
         K8S_Prod_File = "k8s_Prod.yaml"
         Prod_Namespace = "prod-aadil-ns"
+        Dev_Env = "dev"
+        Stg_Env = "stg"
+        Prod_Env= "prd"
+        Helm_Path = "${WORKSPACE}/smartapp-shared-library/charts"
         
     }
 
     stages{
+
+        stage ('Checkout'){
+            steps{
+                println("Checkout: Cloning git repo for SharedLibrary")
+                script{
+                    d.gitClone()
+                }
+            }
+        }
 
         stage ('Build'){
             when {
@@ -114,7 +127,7 @@ def call(Map pipelineParams){
                      echo "--------------------- Executing Deploy to dev  Stage ----------------------"
                     //d.auth_login("${env.GKE_Dev_Cluster_Name}","${env.GKE_Dev_Region}")
                     //d.deployinK8("${env.K8S_Dev_File}","${env.DEV_Namespace}",docker_image)
-                    d.k8sHelmChartDeploy()
+                    d.k8sHelmChartDeploy(${env.Application_Name},"${env.Dev_Env}","${env.Helm_Path}","${GIT_COMMIT}")  
                 }
             }
         }

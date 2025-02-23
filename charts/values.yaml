@@ -11,5 +11,6 @@ svcName:
 replicas: 
   default: 1
 image:
-  name: xyz
+  name: aadil08/eureka
+  tag: random
 targetPort: 8761

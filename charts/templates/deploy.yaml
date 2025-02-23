@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: {{ .Values.appName }}
-        image: DIT
+        image: "{{ .Values.image.name }}:${{ .Values.image.tag }}"

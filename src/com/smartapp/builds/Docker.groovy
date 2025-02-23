@@ -47,10 +47,20 @@ class Docker{
 
     // Helm Deployment
 
-    def k8sHelmChartDeploy(){
+    def k8sHelmChartDeploy(appName, env, helmChartPath, imageTag){
         jenkins.sh """
         echo "Entering Helm Groovy Method"
         helm version
+        echo "Intalling the Chart "
+        helm install ${appName}-${env}-chart -f  ./.cicd/helm/values_${env}.yaml --set image.tag=${imageTag}  ${helmChartPath} 
+        """
+    }
+
+    def gitClone(){
+        jenkins.sh """
+        echo "Executing Git Clone for getting the Chart from Shared Library"
+        git clone -b main https://github.com/nzalpha/smartapp-shared-library.git 
+        echo "listint the files after clone"
         """
     }
 

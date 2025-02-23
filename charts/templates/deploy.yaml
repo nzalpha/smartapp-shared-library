@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name:  {{ .Values.depName }}  # eureka-dev-dep
+  namespace: {{ .Values.nameSpace }} 
 spec:
   replicas:  {{ .Values.replicas.default }}  #1
   selector:

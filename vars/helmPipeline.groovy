@@ -176,6 +176,12 @@ def call(Map pipelineParams){
             }
         }
 
+        stage ('Clean workspace'){
+            steps{
+                cleanWs()
+            }
+        }
+
 
 
 
